@@ -1,12 +1,20 @@
 'use client';
 
 import type { OdontogramProps } from './types';
-import { UPPER_ROW, LOWER_ROW } from './constants';
+import { UPPER_ROW, LOWER_ROW, UPPER_TEMP_ROW, LOWER_TEMP_ROW } from './constants';
 import { ToothRow } from './ToothRow';
 
 export function OdontogramBoard({ data, onChange, readOnly }: OdontogramProps) {
   return (
     <div className="inline-flex flex-col items-center gap-2 rounded-2xl bg-slate-950 p-6">
+      <ToothRow
+        toothIds={UPPER_TEMP_ROW}
+        data={data}
+        onChange={onChange}
+        isUpper={true}
+        readOnly={readOnly}
+      />
+
       <ToothRow
         toothIds={UPPER_ROW}
         data={data}
@@ -19,6 +27,14 @@ export function OdontogramBoard({ data, onChange, readOnly }: OdontogramProps) {
 
       <ToothRow
         toothIds={LOWER_ROW}
+        data={data}
+        onChange={onChange}
+        isUpper={false}
+        readOnly={readOnly}
+      />
+
+      <ToothRow
+        toothIds={LOWER_TEMP_ROW}
         data={data}
         onChange={onChange}
         isUpper={false}

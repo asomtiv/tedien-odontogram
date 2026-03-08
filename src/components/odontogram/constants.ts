@@ -17,7 +17,7 @@ export const FACE_LABELS: Record<FaceName, string> = {
 
 export const STATUS_OPTIONS: { value: FaceStatus; label: string }[] = [
   { value: 'healthy', label: 'Sano' },
-  { value: 'decay', label: 'Caries' },
+  { value: 'decay', label: 'A restaurar' },
   { value: 'restored', label: 'Restaurado' },
   { value: 'absent', label: 'Ausente' },
 ];
@@ -55,7 +55,7 @@ export function getFacePolygons(
  */
 export function isMesialRight(toothId: string): boolean {
   const quadrant = parseInt(toothId[0], 10);
-  return quadrant === 1 || quadrant === 4;
+  return quadrant === 1 || quadrant === 4 || quadrant === 5 || quadrant === 8;
 }
 
 // Row layouts as displayed on screen (left to right)
@@ -67,6 +67,17 @@ export const UPPER_ROW: string[] = [
 export const LOWER_ROW: string[] = [
   '48', '47', '46', '45', '44', '43', '42', '41',
   '31', '32', '33', '34', '35', '36', '37', '38',
+];
+
+// Deciduous (temporary) teeth rows
+export const UPPER_TEMP_ROW: string[] = [
+  '55', '54', '53', '52', '51',
+  '61', '62', '63', '64', '65',
+];
+
+export const LOWER_TEMP_ROW: string[] = [
+  '85', '84', '83', '82', '81',
+  '71', '72', '73', '74', '75',
 ];
 
 export const DEFAULT_FACES: ToothFaces = {

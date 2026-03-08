@@ -14,11 +14,13 @@ interface ToothRowProps {
 }
 
 export function ToothRow({ toothIds, data, onChange, isUpper, readOnly }: ToothRowProps) {
+  const midlineIndex = Math.floor(toothIds.length / 2);
+
   return (
-    <div className="flex items-end gap-0.5">
+    <div className="flex items-end justify-center gap-0.5">
       {toothIds.map((id, i) => (
         <React.Fragment key={id}>
-          {i === 8 && (
+          {i === midlineIndex && (
             <div className="mx-1 h-16 w-px self-center bg-slate-700" />
           )}
           <div className="flex flex-col items-center gap-0.5">
