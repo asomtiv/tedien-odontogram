@@ -1,4 +1,4 @@
-import type { FaceName, FaceStatus, ToothFaces } from './types';
+import type { FaceName, FaceStatus, ToothFaces, ToothOverlay, ToothState } from './types';
 
 export const STATUS_COLORS: Record<FaceStatus, string> = {
   healthy: '#f1f5f9',
@@ -87,3 +87,15 @@ export const DEFAULT_FACES: ToothFaces = {
   distal: 'healthy',
   oclusal: 'healthy',
 };
+
+export const DEFAULT_TOOTH_STATE: ToothState = {
+  faces: DEFAULT_FACES,
+  overlay: 'none',
+};
+
+export const OVERLAY_OPTIONS: { value: ToothOverlay; label: string; color: string }[] = [
+  { value: 'none', label: 'Sin tratamiento', color: 'transparent' },
+  { value: 'extraction', label: 'Extracción', color: '#ef4444' },
+  { value: 'absent', label: 'Ausente', color: '#334155' },
+  { value: 'crown', label: 'Corona', color: '#2563eb' },
+];

@@ -1,19 +1,33 @@
 'use client';
 
 import React from 'react';
-import type { FaceName, FaceStatus, OdontogramData } from './types';
-import { DEFAULT_FACES } from './constants';
+import type { FaceName, FaceStatus, ToothOverlay, ToothState } from './types';
+import { DEFAULT_TOOTH_STATE } from './constants';
 import { Tooth } from './Tooth';
 
 interface ToothRowProps {
   toothIds: string[];
-  data: OdontogramData;
-  onChange: (toothId: string, face: FaceName, status: FaceStatus) => void;
+  teeth: Record<string, ToothState>;
+  onFaceChange: (toothId: string, face: FaceName, status: FaceStatus) => void;
+  onOverlayChange: (toothId: string, overlay: ToothOverlay) => void;
   isUpper: boolean;
   readOnly?: boolean;
+  prosthesisMode?: boolean;
+  selectedTeeth?: Set<string>;
+  onToggleSelect?: (toothId: string) => void;
 }
 
-export function ToothRow({ toothIds, data, onChange, isUpper, readOnly }: ToothRowProps) {
+export function ToothRow({
+  toothIds,
+  teeth,
+  onFaceChange,
+  onOverlayChange,
+  isUpper,
+  readOnly,
+  prosthesisMode,
+  selectedTeeth,
+  onToggleSelect,
+}: ToothRowProps) {
   const midlineIndex = Math.floor(toothIds.length / 2);
 
   return (
@@ -23,16 +37,19 @@ export function ToothRow({ toothIds, data, onChange, isUpper, readOnly }: ToothR
           {i === midlineIndex && (
             <div className="mx-1 h-16 w-px self-center bg-slate-700" />
           )}
-          <div className="flex flex-col items-center gap-0.5">
+          <div className="flex flex-col items-center gap-0.5" data-tooth-id={id}>
             {isUpper && (
               <span className="font-mono text-[10px] text-slate-500">{id}</span>
             )}
             <Tooth
               toothId={id}
-              faces={data[id] ?? DEFAULT_FACES}
-              onChange={(face, status) => onChange(id, face, status)}
+              state={teeth[id] ?? DEFAULT_TOOTH_STATE}
+              onFaceChange={(face, status) => onFaceChange(id, face, status)}
+              onOverlayChange={(overlay) => onOverlayChange(id, overlay)}
               isUpper={isUpper}
               readOnly={readOnly}
+              isSelected={prosthesisMode && selectedTeeth?.has(id)}
+              onSelect={prosthesisMode ? () => onToggleSelect?.(id) : undefined}
             />
             {!isUpper && (
               <span className="font-mono text-[10px] text-slate-500">{id}</span>
