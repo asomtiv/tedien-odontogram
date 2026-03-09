@@ -79,7 +79,7 @@ export function OdontogramBoard({ data, onChange, readOnly }: OdontogramProps) {
   };
 
   return (
-    <div ref={containerRef} className="relative inline-flex flex-col items-center gap-2 rounded-2xl bg-slate-950 p-6">
+    <div ref={containerRef} className="relative inline-flex flex-col items-center gap-2 rounded-2xl bg-slate-700 p-6 pt-14">
       <ProsthesisToolbar
         isActive={prosthesisMode}
         onToggle={() => {

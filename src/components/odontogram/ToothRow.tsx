@@ -39,7 +39,7 @@ export function ToothRow({
           )}
           <div className="flex flex-col items-center gap-0.5" data-tooth-id={id}>
             {isUpper && (
-              <span className="font-mono text-[10px] text-slate-500">{id}</span>
+              <span className="font-sans font-bold text-[10px] text-slate-300">{id}</span>
             )}
             <Tooth
               toothId={id}
@@ -52,7 +52,7 @@ export function ToothRow({
               onSelect={prosthesisMode ? () => onToggleSelect?.(id) : undefined}
             />
             {!isUpper && (
-              <span className="font-mono text-[10px] text-slate-500">{id}</span>
+              <span className="font-sans font-bold text-[10px] text-slate-300">{id}</span>
             )}
           </div>
         </React.Fragment>
